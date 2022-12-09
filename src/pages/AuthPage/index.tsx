@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { AuthContainer, AuthPageWrapper, AuthSwapButton, ButtonContainer } from './AuthPage.styled';
 import LoginComponent from './components/LoginComponent';
 import RegisterComponent from './components/RegisterComponent';
 
-const AuthPage = () => {
-    const [page, setPage] = useState(0);
+interface Props {
+    page?: boolean
+}
+
+const AuthPage = (props: Props) => {
+    const [page, setPage] = useState(props.page ?? 0);
+    const navigate = useNavigate();
 
     return (
         <AuthPageWrapper>
