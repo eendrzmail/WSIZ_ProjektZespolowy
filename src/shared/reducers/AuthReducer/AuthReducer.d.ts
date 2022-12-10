@@ -1,3 +1,5 @@
 export interface IAuthReducer {
-    user: object | null;
+    user: {
+        userName: string
+    } | null;
 }

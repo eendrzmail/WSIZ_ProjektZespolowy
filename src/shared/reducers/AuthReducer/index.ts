@@ -24,13 +24,12 @@ export const authReducer = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(asyncLogin.fulfilled, (state, action) => {
-                console.log(action.payload);
                 state.user = action.payload;
             });
     }
 });
 
-export const getAuth = (state: RootState): object | null => 
+export const getAuth = (state: RootState): typeof state.auth.user | null => 
     state.auth.user;
 
 export const { login, logout } = authReducer.actions;

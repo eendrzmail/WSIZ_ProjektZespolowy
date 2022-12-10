@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router';
 import { useAppSelector } from '../../app/hooks';
 import { getAuth } from '../../shared/reducers/AuthReducer';
 import { AppContent, AppNav, AppWrapper } from './AppPage.styled';
+import Menu from './components/Menu';
 import { ROUTING } from './utils/const';
 
 const AppPage = () =>  {
@@ -38,7 +39,7 @@ const AppPage = () =>  {
             </AppContent>
             
             <AppNav>
-                  Szukaj | Profil | Zwierzęta
+                <Menu />
             </AppNav>
         </AppWrapper>
     );
