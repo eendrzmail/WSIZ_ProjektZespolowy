@@ -7,7 +7,7 @@ export const asyncLogin = createAsyncThunk(
     }> => 
         new Promise((res, rej) => {
             setTimeout(
-                () => res({userName: 'asd'}),
+                () => res({userName: 'Grzechuuu'}),
                 2000
             );
         })

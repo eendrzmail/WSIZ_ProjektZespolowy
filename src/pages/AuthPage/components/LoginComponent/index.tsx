@@ -1,15 +1,19 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useAppDispatch } from '../../../../app/hooks';
+import Loader from '../../../../components/Loader';
 import { asyncLogin } from '../../../../shared/reducers/AuthReducer/asyncThunk';
 
 const LoginComponent = () => {
     const dispatch = useAppDispatch();
+    const [isLoading, setIsLoading] = useState(false);
     
     const handleClick = useCallback(
         () => {
+            setIsLoading(true);
+            
             dispatch(asyncLogin())
-                .finally(() => console.log('asdad'));
-
+                .catch(console.error)
+                .finally(() => setIsLoading(false));
         },
         []
     );
@@ -18,11 +22,16 @@ const LoginComponent = () => {
         <div>
             LoginComponent
 
-            <button
-                onClick={handleClick}
-            >
-                Zaloguj
-            </button>
+            {!isLoading
+                ? (
+                    <button
+                        onClick={handleClick}
+                    >
+                        Zaloguj
+                    </button>
+                )
+                : <Loader />
+            }
         </div>
     );
 };
