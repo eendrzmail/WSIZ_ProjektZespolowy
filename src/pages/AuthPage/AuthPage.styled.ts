@@ -18,6 +18,7 @@ export const AuthContainer = styled.div`
     min-height: 500px;
     background-color: ${theme.colors.mainColor};
     border-radius: ${theme.borderRadius};
+    padding-bottom: 10px;
 `;
 
 export const AuthSwapButton = styled.button`

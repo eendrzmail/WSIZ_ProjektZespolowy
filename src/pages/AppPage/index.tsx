@@ -1,17 +1,21 @@
 import React, { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router';
-import { useAppSelector } from '../../app/hooks';
-import { getAuth } from '../../shared/reducers/AuthReducer';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import AuthReducer, { getAuth, syncLS } from '../../shared/reducers/AuthReducer';
 import { AppContent, AppNav, AppWrapper } from './AppPage.styled';
 import Menu from './components/Menu';
 import { ROUTING } from './utils/const';
 
 const AppPage = () =>  {
     const auth = useAppSelector(getAuth);
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    
 
     useEffect(
         () => {
+            dispatch(syncLS());
+            
             console.log('AppPage:: ',auth);
             if (!auth) {
                 navigate('/login');
