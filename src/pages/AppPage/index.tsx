@@ -16,7 +16,7 @@ const AppPage = () =>  {
         () => {
             dispatch(syncLS());
             
-            console.log('AppPage:: ',auth);
+            // console.log('AppPage:: ',auth);
             if (!auth) {
                 navigate('/login');
             }
@@ -26,6 +26,10 @@ const AppPage = () =>  {
 
     return (
         <AppWrapper>
+            <AppNav>
+                <Menu />
+            </AppNav>
+            
             <AppContent>
                 <Routes>
                     <Route element={ROUTING[0].component} index/>
@@ -41,10 +45,6 @@ const AppPage = () =>  {
                     <Route path={'*'} element={<div>Nie znaleziono strony</div>} />
                 </Routes>
             </AppContent>
-            
-            <AppNav>
-                <Menu />
-            </AppNav>
         </AppWrapper>
     );
 };

@@ -6,4 +6,5 @@ export interface IAuthReducer {
         isSuspended: boolean;
         isBanned: boolean;
     } | null;
+    jwt: string | null;
 }
