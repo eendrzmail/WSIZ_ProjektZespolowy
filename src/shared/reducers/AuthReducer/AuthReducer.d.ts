@@ -1,5 +1,9 @@
 export interface IAuthReducer {
     user: {
-        userName: string
+        sub: string,
+        id: number,
+        roles: string[],
+        isSuspended: boolean;
+        isBanned: boolean;
     } | null;
 }

@@ -2,6 +2,7 @@ import { RootState } from './../../../app/store';
 import { createSlice } from '@reduxjs/toolkit';
 import { IAuthReducer } from './AuthReducer';
 import { asyncLogin } from './asyncThunk';
+import { parseJwt } from '../../common/helpers';
 
 const initialState: IAuthReducer = {
     user: null
@@ -11,12 +12,6 @@ export const authReducer = createSlice({
     name: 'AuthReducer',
     initialState,
     reducers: {
-        login(state) {
-            state.user = {
-                userName: 'jakiś tam user'
-            };
-        },
-
         logout(state) {
             state.user = null;
             localStorage.removeItem('user');
@@ -34,8 +29,10 @@ export const authReducer = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(asyncLogin.fulfilled, (state, action) => {
-                localStorage.setItem('user', JSON.stringify(action.payload));
-                state.user = action.payload;
+                console.log(action.payload.jwt);
+                const parsedJWT = parseJwt(action.payload.jwt);
+                localStorage.setItem('user', JSON.stringify(parsedJWT));
+                state.user = parsedJWT;
             });
     }
 });
@@ -44,5 +41,5 @@ export const getAuth = (state: RootState): typeof state.auth.user | null => {
     return state.auth.user;
 };
 
-export const { login, logout, syncLS } = authReducer.actions;
+export const { logout, syncLS } = authReducer.actions;
 export default authReducer.reducer;
