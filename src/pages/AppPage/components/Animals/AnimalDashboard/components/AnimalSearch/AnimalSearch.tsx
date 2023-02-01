@@ -45,15 +45,40 @@ const AnimalSearch = ({
 
     const handleDislike = useCallback(
         (animal: IAnimal) => {
-            setPropositions(prev => prev.filter(prop => prop.id != animal.id));
+            const prepareData = {
+                receiverAnimalId: animal.id
+            };
+
+            fetch(`${API_HOST}/animal/${id}/interaction/dislike`, 
+                {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': jwt,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(prepareData)
+                })
+                .then(() => setPropositions(prev => prev.filter(prop => prop.id != animal.id)));
         },
         []
     );
 
     const handleLike = useCallback(
         (animal: IAnimal) => {
-            console.log(animal);
-            setPropositions(prev => prev.filter(prop => prop.id != animal.id));
+            const prepareData = {
+                receiverAnimalId: animal.id
+            };
+
+            fetch(`${API_HOST}/animal/${id}/interaction/like`, 
+                {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': jwt,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(prepareData)
+                })
+                .then(() => setPropositions(prev => prev.filter(prop => prop.id != animal.id)));
         },
         []
     );

@@ -32,7 +32,7 @@ const AnimalCard = ({
                     <CloseIcon />
                 </ActionIcon>
 
-                <ActionIcon onClick={() => onDislike(animal)}>
+                <ActionIcon onClick={() => onLike(animal)}>
                     <FavoriteIcon />
                 </ActionIcon>
             </IconContainer>
