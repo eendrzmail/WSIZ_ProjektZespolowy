@@ -77,6 +77,14 @@ const Chat = ({
     );
 
     useEffect(fetchChat, [fetchChat, chatId]);
+    useEffect(
+        () => {
+            const interval = setInterval(fetchChat, 15_000);
+
+            return () => clearInterval(interval);
+        },
+        []
+    );
 
     return (
         <ChatWrapper>

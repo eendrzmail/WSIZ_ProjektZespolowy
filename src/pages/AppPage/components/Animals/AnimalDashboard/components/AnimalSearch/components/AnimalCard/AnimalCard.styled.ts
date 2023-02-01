@@ -11,6 +11,8 @@ export const CardWrapper = styled.div`
     width: 250px;
     text-decoration: none;
     padding: 10px;
+    box-shadow: 0px 0px 15px #999999;
+
 
     figure {
         margin: 0;
@@ -48,4 +50,11 @@ export const ActionIcon = styled.div`
             fill: white;
         }
     }
+`;
+
+export const Name = styled.span`
+    font-weight: bold;
+    font-size: 1.3rem;
+    width: 100%;
+    text-align: center;
 `;

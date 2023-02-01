@@ -20,3 +20,9 @@ export const ChatItem = styled.div`
         background-color: lightgray;
     }
 `;
+
+export const Box = styled.div`
+    display: flex;
+    box-shadow: 0px 0px 15px #999999;
+    border-radius: 4px;
+`;

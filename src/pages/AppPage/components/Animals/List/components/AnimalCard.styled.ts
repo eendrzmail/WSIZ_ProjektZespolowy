@@ -8,6 +8,8 @@ export const CardWrapper = styled(NavLink)`
     flex-direction: column;
     border-radius: 5px;
     background-color: ${theme.colors.secondaryColor};
+    box-shadow: 0px 0px 15px #999999;
+
     color: black;
     width: 250px;
     text-decoration: none;
@@ -22,4 +24,10 @@ export const CardWrapper = styled(NavLink)`
             border: 10px solid $secondaryColor;
         }
     }
+`;
+
+export const Name = styled.span`
+    font-size: 1.3rem;
+    width: 100%;
+    text-align: center;
 `;

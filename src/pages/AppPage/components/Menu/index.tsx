@@ -24,7 +24,6 @@ const Menu = () => {
 
     return (
         <>
-
             <MainPage to={ROUTE.ANIMALS}>
                 Główna
             </MainPage>

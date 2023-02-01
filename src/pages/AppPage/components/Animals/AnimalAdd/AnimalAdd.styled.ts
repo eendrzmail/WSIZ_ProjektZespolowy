@@ -17,4 +17,5 @@ export const AnimalForm = styled.form`
     flex-direction: column;
     gap: 15px;
     padding: 25px;
+    box-shadow: 0px 0px 15px #999999;
 `;

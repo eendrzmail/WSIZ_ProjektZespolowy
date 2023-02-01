@@ -9,4 +9,5 @@ export const MatchesListContainer = styled.div`
     border-radius: 5px 0 0 5px;
     background-color: ${theme.colors.backgroundColor};
     color: black;
+    border-right: 1px solid lightgray;
 `;

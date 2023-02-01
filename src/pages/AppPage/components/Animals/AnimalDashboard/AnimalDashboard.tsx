@@ -22,7 +22,9 @@ const AnimalDashboard = (props: Props) => {
             </Routes>
 
             <SubMenu>
-                <NavLink to={ANIMAL_DASHBOARD_ROUTING.SEARCH}>
+                <NavLink 
+                    to={ANIMAL_DASHBOARD_ROUTING.SEARCH}
+                >
                     <SavedSearchIcon />
                 </NavLink>
 

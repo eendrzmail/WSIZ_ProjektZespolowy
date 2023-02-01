@@ -19,7 +19,8 @@ export const NewAnimal = styled(NavLink)`
     align-items: center;
     justify-content: center;
     border-radius: 5px;
-    border: 1px dashed white;
+    border: 1px dashed black;
+    box-shadow: 0px 0px 15px #999999;
 `;
 
 export const AddButton = styled.div`

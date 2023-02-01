@@ -13,6 +13,7 @@ export const SubMenu = styled.div`
     justify-content: center;
     gap: 20px;
     background-color: ${theme.colors.primaryColor};
+    box-shadow: 0px 0px 15px #999999;
 
     a {
         display: flex;
@@ -21,6 +22,15 @@ export const SubMenu = styled.div`
         svg {
             width: 35px;
             height: 35px;
+            fill: white;
+        }
+
+        &.active {
+            svg {
+                width: 35px;
+                height: 35px;
+                fill: aquamarine;
+            }
         }
     }
 `;

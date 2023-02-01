@@ -3,6 +3,6 @@ export const theme = {
     colors: {
         backgroundColor: 'white',
         primaryColor: '#6DE26B',
-        secondaryColor: '#d6ded5'
+        secondaryColor: '#ebebeb'
     }
 }; 

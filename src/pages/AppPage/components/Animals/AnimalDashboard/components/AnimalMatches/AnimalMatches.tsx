@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { IMatch } from '../../../../../../../types/Match';
-import { MatchesWrapper } from './AnimalMatches.styled';
+import { Box, MatchesWrapper } from './AnimalMatches.styled';
 import Chat from './Chat/Chat';
 import MatchesChatList from './MatchesChatList/MatchesChatList';
 
@@ -20,7 +20,7 @@ const AnimalMatches = ({
 
     return (
         <MatchesWrapper>
-            <>
+            <Box>
                 <MatchesChatList
                     animalId={id}
                     onSelect={handleChange}
@@ -32,7 +32,7 @@ const AnimalMatches = ({
                     chatId={chatId?.chatId || null}
                     title={chatId?.name}
                 />
-            </>
+            </Box>
         </MatchesWrapper>
     );
 };
