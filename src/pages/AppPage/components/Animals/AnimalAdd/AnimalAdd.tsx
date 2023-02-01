@@ -31,7 +31,7 @@ const AnimalAdd = () => {
 
             const prepareData = {
                 ...data,
-                dateOfBirth: `${dateOfBirth.getFullYear()}-${zfill(dateOfBirth.getMonth()+1, 2)}-${dateOfBirth.getDate()}`
+                dateOfBirth: `${dateOfBirth.getFullYear()}-${zfill(dateOfBirth.getMonth()+1, 2)}-${zfill(dateOfBirth.getDate(), 2)}`
             };
 
             setIsLoading(true);
@@ -47,8 +47,6 @@ const AnimalAdd = () => {
             })
                 // .then(() => navigate('/'))
                 .finally(() => setIsLoading(false));
-            
-            
         },
         []
     );
