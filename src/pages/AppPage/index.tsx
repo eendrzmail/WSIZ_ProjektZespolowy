@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router';
-import { useAppSelector } from '../../app/hooks';
-import { getAuth } from '../../shared/reducers/AuthReducer';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import AuthReducer, { getAuth, syncLS } from '../../shared/reducers/AuthReducer';
 import { AppContent, AppNav, AppWrapper } from './AppPage.styled';
 import Menu from './components/Menu';
 import { ROUTING } from './utils/const';
 
 const AppPage = () =>  {
     const auth = useAppSelector(getAuth);
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    
 
     useEffect(
         () => {
-            console.log('AppPage:: ',auth);
+            dispatch(syncLS());
+            
+            // console.log('AppPage:: ',auth);
             if (!auth) {
                 navigate('/login');
             }
@@ -22,6 +26,10 @@ const AppPage = () =>  {
 
     return (
         <AppWrapper>
+            <AppNav>
+                <Menu />
+            </AppNav>
+            
             <AppContent>
                 <Routes>
                     <Route element={ROUTING[0].component} index/>
@@ -37,10 +45,6 @@ const AppPage = () =>  {
                     <Route path={'*'} element={<div>Nie znaleziono strony</div>} />
                 </Routes>
             </AppContent>
-            
-            <AppNav>
-                <Menu />
-            </AppNav>
         </AppWrapper>
     );
 };

@@ -1,16 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { API_HOST } from '../../common/consts';
 
 export const asyncLogin = createAsyncThunk(
     'auth/asyncLogin',
-    async (_): Promise<{
-        userName: string
+    async (data: {username: string, password: string}): Promise<{
+        jwt: string
     }> => 
-        new Promise((res, rej) => {
-            setTimeout(
-                () => res({userName: 'Grzechuuu'}),
-                2000
-            );
+        fetch(`${API_HOST}/login`, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
         })
+            .then((response) => response.json())
 );
 // {
 //     try {
