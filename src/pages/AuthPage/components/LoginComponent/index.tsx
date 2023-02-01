@@ -54,7 +54,7 @@ const LoginComponent = () => {
                             variant="outlined"
                             type="submit"
                         >
-                        Zaloguj
+                            Zaloguj
                         </Button>
                     )
                     : <Loader />

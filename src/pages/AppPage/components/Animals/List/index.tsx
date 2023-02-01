@@ -7,6 +7,7 @@ import { IAnimal } from '../../../../../types/Animal';
 import AnimalCard from './components/AnimalCard';
 import { AddButton, AnimalListWrapper, NewAnimal } from './List.styled';
 import AddIcon from '@mui/icons-material/Add';
+import { ROUTE, ROUTING } from '../../../utils/const';
 
 
 const AnimalsList = () => {
@@ -45,7 +46,7 @@ const AnimalsList = () => {
                 ? <Loader />
                 : (
                     <>
-                        <NewAnimal to={''}>
+                        <NewAnimal to={`/${ROUTE.NEW_ANIMAL}`}>
                             <AddButton>
                                 <AddIcon />
                             </AddButton>
