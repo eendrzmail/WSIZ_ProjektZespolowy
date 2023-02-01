@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { theme } from '../../../../../../shared/styles/theme';
 
 export const CardWrapper = styled(NavLink)`
-    min-height: 230px;
+    min-height: 352px;
     display:flex;
     flex-direction: column;
     border-radius: 5px;

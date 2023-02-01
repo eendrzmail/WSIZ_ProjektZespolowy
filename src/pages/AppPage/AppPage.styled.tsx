@@ -22,8 +22,9 @@ export const AppNav = styled.nav`
     gap: 20px;
     padding: 0 20px;
     box-sizing: border-box;
+    color: black;
 
-    & > :last-child {
+    & > :nth-child(2) {
         margin-left: auto;
     }
 `;

@@ -57,7 +57,7 @@ const Chat = ({
 
             setMessages(prev => [{
                 id: 999,
-                senderId: auth.id,
+                senderId: +animalId,
                 content: data.content,
                 time: new Date()
             }, ...prev]);
@@ -94,7 +94,7 @@ const Chat = ({
                                     .map(message => (
                                         <ChatMessageBox key={message.id}>
                                             <Message 
-                                                variant={message.senderId == auth?.id
+                                                variant={message.senderId == +animalId
                                                     ? 'self'
                                                     : 'other'
                                                 }

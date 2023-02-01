@@ -45,7 +45,7 @@ const AnimalAdd = () => {
                 },
                 body: JSON.stringify(prepareData)
             })
-                // .then(() => navigate('/'))
+                .then(() => navigate('/'))
                 .finally(() => setIsLoading(false));
         },
         []
