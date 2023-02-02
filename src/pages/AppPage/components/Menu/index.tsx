@@ -8,6 +8,7 @@ import { ROUTE } from '../../utils/const';
 import { CustomButton, MainPage, MenuContainer } from './Menu.styled';
 import PetsIcon from '@mui/icons-material/Pets';
 import LogoutIcon from '@mui/icons-material/Logout';
+import NotificationComponent from './Notification/Notification';
 
 const Menu = () => {
     const auth = useAppSelector(getAuth);
@@ -33,6 +34,8 @@ const Menu = () => {
             <span>
                 {auth.sub}
             </span>
+
+            <NotificationComponent />
 
             <CustomButton 
                 variant="outlined"
