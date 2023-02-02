@@ -96,15 +96,23 @@ const NotificationComponent = (props: Props) => {
 
             {isVisible && (
                 <NotificationListWrapper>
-                    {notifications.map(notification => (
-                        <NotificationItem key={notification.id}>
-                            {notification.content}
+                    {notifications.length
+                        ? (
+                            notifications.map(notification => (
+                                <NotificationItem key={notification.id}>
+                                    {notification.content}
 
-                            <IconContainer onClick={() => deleteNotifications(notification.id)}>
-                                <DeleteIcon />
-                            </IconContainer>
-                        </NotificationItem>
-                    ))}
+                                    <IconContainer onClick={() => deleteNotifications(notification.id)}>
+                                        <DeleteIcon />
+                                    </IconContainer>
+                                </NotificationItem>
+                            ))
+                        )
+                        : <div>
+                            Brak powiadomień
+                        </div>
+                    }
+                    
                 </NotificationListWrapper>
             )}
         </NotificationWrapper>
