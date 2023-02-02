@@ -26,7 +26,7 @@ const MatchesChatList = ({
             if (!auth) return;
             setIsLoading(true);
 
-            fetch(`${API_HOST}/user/${auth.id}/animal/${animalId}/matchings`, {
+            fetch(`${API_HOST}/users/${auth.id}/animals/${animalId}/matchings`, {
                 method: 'GET',
                 headers: {
                     'Authorization': jwt,

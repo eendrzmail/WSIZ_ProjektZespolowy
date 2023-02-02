@@ -5,7 +5,9 @@ import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { getAuth, logout } from '../../../../shared/reducers/AuthReducer';
 import { ROUTE } from '../../utils/const';
-import { MainPage, MenuContainer } from './Menu.styled';
+import { CustomButton, MainPage, MenuContainer } from './Menu.styled';
+import PetsIcon from '@mui/icons-material/Pets';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Menu = () => {
     const auth = useAppSelector(getAuth);
@@ -25,19 +27,19 @@ const Menu = () => {
     return (
         <>
             <MainPage to={ROUTE.ANIMALS}>
-                Główna
+                <PetsIcon />
             </MainPage>
 
             <span>
                 {auth.sub}
             </span>
 
-            <Button 
+            <CustomButton 
                 variant="outlined"
                 onClick={handleLogout}
             >
-                Wyloguj
-            </Button>
+                <LogoutIcon />
+            </CustomButton>
         </>
         
     );

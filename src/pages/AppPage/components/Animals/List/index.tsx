@@ -8,11 +8,15 @@ import AnimalCard from './components/AnimalCard';
 import { AddButton, AnimalListWrapper, NewAnimal } from './List.styled';
 import AddIcon from '@mui/icons-material/Add';
 import { ROUTE, ROUTING } from '../../../utils/const';
+import { showSnackbar } from '../../../../../components/Snackbar/Snackbar';
+import { useSnackbar } from 'notistack';
 
 
 const AnimalsList = () => {
     const auth = useAppSelector(getAuth);
     const jwt = useAppSelector(getJWT);
+    const { enqueueSnackbar } = useSnackbar();
+
 
     const [isFetching, setisFetching] = useState(false);
     const [animals, setAnimals] = useState<IAnimal[]>([]);
@@ -22,17 +26,19 @@ const AnimalsList = () => {
             if (!auth) return;
             setisFetching(true);
 
-            fetch(`${API_HOST}/user/${auth.id}/animal`, {
+            fetch(`${API_HOST}/users/${auth.id}/animals`, {
                 method: 'GET',
                 headers: {
                     'Authorization': jwt,
                     'Content-Type': 'application/json',
                 },
             })
-                .then(
-                    (response) => response.json()
-                        .then(setAnimals)
-                )
+                .then((response) => {
+                    if (response.ok) return response.json();
+                    return Promise.reject(response);
+                })
+                .then(setAnimals)
+                .catch(() => showSnackbar(enqueueSnackbar, null, 'Nie udało się pobrać zwierząt', 'error'))
                 .finally(() => setisFetching(false));
         },
         []

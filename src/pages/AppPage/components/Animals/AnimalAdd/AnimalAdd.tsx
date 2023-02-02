@@ -9,12 +9,16 @@ import { AddAnimalWrapper, AnimalForm } from './AnimalAdd.styled';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './customstyle.css';
+import { showSnackbar } from '../../../../../components/Snackbar/Snackbar';
+import { useSnackbar } from 'notistack';
 
 function zfill(num: number, len: number) {return (Array(len).join('0') + num).slice(-len);}
 
 const AnimalAdd = () => {
     const auth = useAppSelector(getAuth);
     const jwt = useAppSelector(getJWT);
+    const { enqueueSnackbar } = useSnackbar();
+
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const {
@@ -37,7 +41,7 @@ const AnimalAdd = () => {
             setIsLoading(true);
             console.log(data);
 
-            fetch(`${API_HOST}/user/${auth.id}/animal`, {
+            fetch(`${API_HOST}/user/${auth.id}/animals`, {
                 method: 'POST',
                 headers: {
                     'Authorization': jwt,
@@ -45,7 +49,12 @@ const AnimalAdd = () => {
                 },
                 body: JSON.stringify(prepareData)
             })
+                .then((response) => {
+                    if (response.ok) return response.json();
+                    return Promise.reject(response);
+                })
                 .then(() => navigate('/'))
+                .catch(() => showSnackbar(enqueueSnackbar, null, 'Nie udało się dodać', 'error'))
                 .finally(() => setIsLoading(false));
         },
         []
@@ -94,6 +103,7 @@ const AnimalAdd = () => {
                                 onChange={(date) => field.onChange(date)}
                                 selected={field.value}
                                 className="date"
+                                showYearDropdown
                             />
                         )}
                     />

@@ -25,7 +25,7 @@ const AnimalSearch = ({
             if (!auth) return;
             setisFetching(true);
 
-            fetch(`${API_HOST}/user/${auth.id}/animal/${id}`, {
+            fetch(`${API_HOST}/users/${auth.id}/animals/${id}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': jwt,
@@ -49,7 +49,7 @@ const AnimalSearch = ({
                 receiverAnimalId: animal.id
             };
 
-            fetch(`${API_HOST}/animal/${id}/interaction/dislike`, 
+            fetch(`${API_HOST}/animals/${id}/interactions/dislike`, 
                 {
                     method: 'POST',
                     headers: {
@@ -69,7 +69,7 @@ const AnimalSearch = ({
                 receiverAnimalId: animal.id
             };
 
-            fetch(`${API_HOST}/animal/${id}/interaction/like`, 
+            fetch(`${API_HOST}/animals/${id}/interactions/like`, 
                 {
                     method: 'POST',
                     headers: {
