@@ -21,6 +21,8 @@ export const CardWrapper = styled.div`
             width: 100%;
             border-radius: 4px 4px 0 0;
             border: 10px solid $secondaryColor;
+            width: 230px;
+            height: 230px;
         }
     }
 `;
@@ -41,6 +43,7 @@ export const ActionIcon = styled.div`
     justify-content: center;
     background-color: ${theme.colors.primaryColor};
     cursor: pointer;
+    box-shadow: 0px 0px 15px #999999;
 
     svg {
         width: 40px;

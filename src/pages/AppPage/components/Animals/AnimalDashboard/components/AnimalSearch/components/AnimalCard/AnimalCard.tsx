@@ -2,7 +2,7 @@ import React from 'react';
 import { IAnimal } from '../../../../../../../../../types/Animal';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CloseIcon from '@mui/icons-material/Close';
-import { ActionIcon, CardWrapper, IconContainer, Name } from './AnimalCard.styled';
+import { ActionIcon, CardWrapper, CustomImage, IconContainer, Name } from './AnimalCard.styled';
 
 type Props = {
     animal: IAnimal;
@@ -19,7 +19,7 @@ const AnimalCard = ({
         <div>
             <CardWrapper>
                 <figure>
-                    <img src="https://i1.sndcdn.com/avatars-OfkZjEg3azbQCW4h-nNLRlQ-t500x500.jpg" />
+                    <img src="https://media-be.chewy.com/wp-content/uploads/2022/09/27095535/cute-dogs-pembroke-welsh-corgi.jpg" />
                 </figure>
                 <Name>{animal.name}</Name>
                 <span>{animal.age} lat</span>

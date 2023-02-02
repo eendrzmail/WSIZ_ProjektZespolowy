@@ -41,7 +41,7 @@ const AnimalAdd = () => {
             setIsLoading(true);
             console.log(data);
 
-            fetch(`${API_HOST}/user/${auth.id}/animals`, {
+            fetch(`${API_HOST}/users/${auth.id}/animals`, {
                 method: 'POST',
                 headers: {
                     'Authorization': jwt,

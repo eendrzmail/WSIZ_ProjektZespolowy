@@ -59,7 +59,11 @@ const AnimalsList = () => {
                         </NewAnimal>
 
                         {animals.map(animal => (
-                            <AnimalCard key={animal.id} animal={animal} />
+                            <AnimalCard 
+                                key={animal.id} 
+                                animal={animal} 
+                                onDelete={() => console.log('asd')}
+                            />
                         ))}
                     </>
                 )

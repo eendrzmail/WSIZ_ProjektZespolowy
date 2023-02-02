@@ -1,27 +1,69 @@
-import React from 'react';
+import { useSnackbar } from 'notistack';
+import React, { useCallback } from 'react';
+import { useAppSelector } from '../../../../../../app/hooks';
+import { showSnackbar } from '../../../../../../components/Snackbar/Snackbar';
+import { API_HOST } from '../../../../../../shared/common/consts';
+import { getAuth, getJWT } from '../../../../../../shared/reducers/AuthReducer';
 import { IAnimal } from '../../../../../../types/Animal';
 import { ROUTE } from '../../../../utils/const';
-import { CardWrapper, Name } from './AnimalCard.styled';
+import { CardWrapper, Name, RemoveIcon } from './AnimalCard.styled';
 
 type Props = {
-    animal: IAnimal
+    animal: IAnimal;
+    onDelete: () => void
 }
 
 const AnimalCard = ({
-    animal
+    animal,
+    onDelete
 }: Props) => {
+    const auth = useAppSelector(getAuth);
+    const jwt = useAppSelector(getJWT);
+    const { enqueueSnackbar } = useSnackbar();
+
+    const handleOnClick =  useCallback(
+        () => {
+            if (!auth?.id) return;
+
+            fetch(`${API_HOST}/users/${auth.id}/animals/${animal.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': jwt,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then((response) => {
+                    if (response.ok) return response.json();
+                    return Promise.reject(response);
+                })
+                .then(() => {
+                    showSnackbar(enqueueSnackbar, null, 'Usunięto', 'success');
+                    onDelete();
+                })
+                .catch(() => showSnackbar(enqueueSnackbar, null, 'Nie udało się usunąć', 'error'));
+        },
+        []
+    );
+
     return (
-        <CardWrapper
-            to={`/${ROUTE.ANIMALS}/${animal.id}`}
-        >
-            <figure>
-                <img src="https://i1.sndcdn.com/avatars-OfkZjEg3azbQCW4h-nNLRlQ-t500x500.jpg" />
-            </figure>
-            <Name>{animal.name}</Name>
-            <span>{animal.age} lat</span>
-            {/* <span>{animal.category}</span> */}
-            <span>{animal.description}</span>
-        </CardWrapper>
+        <div style={{position: 'relative'}}>
+            <RemoveIcon onClick={(e) => {
+                e.stopPropagation();
+                handleOnClick();
+            }}/>
+
+            <CardWrapper
+                to={`/${ROUTE.ANIMALS}/${animal.id}`}
+            >
+                <figure>
+                    <img src="https://media-be.chewy.com/wp-content/uploads/2022/09/27095535/cute-dogs-pembroke-welsh-corgi.jpg" />
+                </figure>
+                <Name>{animal.name}</Name>
+                <span>{animal.age} lat</span>
+                {/* <span>{animal.category}</span> */}
+                <span>{animal.description}</span>
+            </CardWrapper>
+        </div>
     );
 };
 

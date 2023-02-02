@@ -35,7 +35,7 @@ const Chat = ({
             if (!chatId) return;
             setIsLoading(true);
 
-            // /animals/{animalId}/chat/{chatId}
+            // /user/{userId}/animals/{animalId}/matchings
             fetch(`${API_HOST}/animals/${animalId}/chat/${chatId}`, {
                 method: 'GET',
                 headers: {
