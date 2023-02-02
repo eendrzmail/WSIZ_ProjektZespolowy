@@ -7,7 +7,7 @@ export const asyncLogin = createAsyncThunk(
         jwt: string
     }> => 
         fetch(`${API_HOST}/login`, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },

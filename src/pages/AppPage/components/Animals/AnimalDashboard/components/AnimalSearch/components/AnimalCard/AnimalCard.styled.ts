@@ -11,6 +11,8 @@ export const CardWrapper = styled.div`
     width: 250px;
     text-decoration: none;
     padding: 10px;
+    box-shadow: 0px 0px 15px #999999;
+
 
     figure {
         margin: 0;
@@ -19,6 +21,8 @@ export const CardWrapper = styled.div`
             width: 100%;
             border-radius: 4px 4px 0 0;
             border: 10px solid $secondaryColor;
+            width: 230px;
+            height: 230px;
         }
     }
 `;
@@ -39,6 +43,7 @@ export const ActionIcon = styled.div`
     justify-content: center;
     background-color: ${theme.colors.primaryColor};
     cursor: pointer;
+    box-shadow: 0px 0px 15px #999999;
 
     svg {
         width: 40px;
@@ -48,4 +53,11 @@ export const ActionIcon = styled.div`
             fill: white;
         }
     }
+`;
+
+export const Name = styled.span`
+    font-weight: bold;
+    font-size: 1.3rem;
+    width: 100%;
+    text-align: center;
 `;

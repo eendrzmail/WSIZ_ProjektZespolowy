@@ -1,8 +1,8 @@
 export const theme = {
-    borderRadius: '10px',
+    borderRadius: '5px',
     colors: {
         backgroundColor: 'white',
         primaryColor: '#6DE26B',
-        secondaryColor: '#d6ded5'
+        secondaryColor: '#ebebeb'
     }
 }; 

@@ -25,7 +25,7 @@ const AnimalSearch = ({
             if (!auth) return;
             setisFetching(true);
 
-            fetch(`${API_HOST}/user/${auth.id}/animal/${id}`, {
+            fetch(`${API_HOST}/users/${auth.id}/animals/${id}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': jwt,
@@ -45,15 +45,40 @@ const AnimalSearch = ({
 
     const handleDislike = useCallback(
         (animal: IAnimal) => {
-            setPropositions(prev => prev.filter(prop => prop.id != animal.id));
+            const prepareData = {
+                receiverAnimalId: animal.id
+            };
+
+            fetch(`${API_HOST}/animals/${id}/interactions/dislike`, 
+                {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': jwt,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(prepareData)
+                })
+                .then(() => setPropositions(prev => prev.filter(prop => prop.id != animal.id)));
         },
         []
     );
 
     const handleLike = useCallback(
         (animal: IAnimal) => {
-            console.log(animal);
-            setPropositions(prev => prev.filter(prop => prop.id != animal.id));
+            const prepareData = {
+                receiverAnimalId: animal.id
+            };
+
+            fetch(`${API_HOST}/animals/${id}/interactions/like`, 
+                {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': jwt,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(prepareData)
+                })
+                .then(() => setPropositions(prev => prev.filter(prop => prop.id != animal.id)));
         },
         []
     );

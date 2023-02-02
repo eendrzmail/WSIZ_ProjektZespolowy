@@ -14,6 +14,7 @@ export const AppContent = styled.main`
 
 export const AppNav = styled.nav`
     height: 100%;
+    box-shadow: 0px 0px 15px #999999;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,8 +23,9 @@ export const AppNav = styled.nav`
     gap: 20px;
     padding: 0 20px;
     box-sizing: border-box;
+    color: black;
 
-    & > :last-child {
+    & > :nth-child(2) {
         margin-left: auto;
     }
 `;

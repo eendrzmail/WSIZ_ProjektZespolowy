@@ -1,9 +1,11 @@
 import React from 'react';
+import AnimalAdd from '../components/Animals/AnimalAdd/AnimalAdd';
 import AnimalDashboard from '../components/Animals/AnimalDashboard/AnimalDashboard';
 import AnimalsList from '../components/Animals/List';
 
 export enum ROUTE {
     ANIMALS = 'animals',
+    NEW_ANIMAL = 'animals/new',
     TEST2 = 'test2'
 }
 
@@ -18,11 +20,11 @@ export const ROUTING: ROUTING_ITEM[] = [
         component: <AnimalsList />
     },
     {
+        path: `${ROUTE.NEW_ANIMAL}`,
+        component: <AnimalAdd />
+    },
+    {
         path: `${ROUTE.ANIMALS}/:id/*`,
         component: <AnimalDashboard />
     },
-    {
-        path: ROUTE.TEST2,
-        component: <div>halohaloo</div>
-    }
 ];
