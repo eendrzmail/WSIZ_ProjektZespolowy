@@ -1,8 +1,9 @@
-import { OptionsObject, SnackbarKey } from 'notistack';
+import { OptionsObject } from 'notistack';
 
 export const showSnackbar = (
     enqueueSnackbar: ((text: string, arg1: OptionsObject) => void),
-    action: null | ((x: SnackbarKey) => void),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    action: any,
     text: string,
     variant: 'success' | 'error'
 ): void => {

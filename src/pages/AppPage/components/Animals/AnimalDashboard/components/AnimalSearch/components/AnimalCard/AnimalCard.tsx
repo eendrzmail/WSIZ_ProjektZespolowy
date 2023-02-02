@@ -2,7 +2,7 @@ import React from 'react';
 import { IAnimal } from '../../../../../../../../../types/Animal';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CloseIcon from '@mui/icons-material/Close';
-import { ActionIcon, CardWrapper, CustomImage, IconContainer, Name } from './AnimalCard.styled';
+import { ActionIcon, CardWrapper, IconContainer, Name } from './AnimalCard.styled';
 
 type Props = {
     animal: IAnimal;
