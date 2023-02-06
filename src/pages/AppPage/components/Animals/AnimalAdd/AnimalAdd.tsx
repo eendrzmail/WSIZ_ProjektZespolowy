@@ -11,6 +11,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './customstyle.css';
 import { showSnackbar } from '../../../../../components/Snackbar/Snackbar';
 import { useSnackbar } from 'notistack';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { object, string } from 'yup';
 
 function zfill(num: number, len: number) {return (Array(len).join('0') + num).slice(-len);}
 
@@ -21,11 +23,22 @@ const AnimalAdd = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+
+    const schema = object().shape({
+        category: string().required(),
+        city: string().required(),
+        county: string().required(),
+        dateOfBirth: string().required(),
+        description: string().required(),
+        name: string().required(),
+    });
     const {
         register, 
         handleSubmit,
         control,
-    } = useForm();
+    } = useForm({
+        resolver: yupResolver(schema)
+    });
 
     const handleOnSubmit = useCallback(
         (data: FieldValues) => {
@@ -62,7 +75,7 @@ const AnimalAdd = () => {
 
     return (
         <AddAnimalWrapper>
-            <AnimalForm onSubmit={handleSubmit(handleOnSubmit)}>
+            <AnimalForm onSubmit={handleSubmit(handleOnSubmit, () => showSnackbar(enqueueSnackbar, null, 'Uzupełnij wszystkie pola', 'error'))}>
                 <TextField id="name" label="Imie" variant="outlined" type="text" {...register('name')}/>
 
                 <TextField 
