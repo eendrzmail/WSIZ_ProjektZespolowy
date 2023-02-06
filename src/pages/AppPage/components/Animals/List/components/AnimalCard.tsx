@@ -1,5 +1,5 @@
 import { useSnackbar } from 'notistack';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useAppSelector } from '../../../../../../app/hooks';
 import { showSnackbar } from '../../../../../../components/Snackbar/Snackbar';
 import { API_HOST } from '../../../../../../shared/common/consts';
@@ -45,6 +45,30 @@ const AnimalCard = ({
         []
     );
 
+    // const getPiture = useCallback(
+    //     () => {
+    //         if (!auth) return;
+
+    //         fetch(`${API_HOST}/users/${auth.id}/animals/${animal.id}/pictures`, {
+    //             method: 'GET',
+    //             headers: {
+    //                 'Authorization': jwt,
+    //             },
+    //         })
+    //             .then((response) => {
+    //                 if (response.ok) return response.json();
+    //                 return Promise.reject(response);
+    //             })
+    //             .then((data) => {
+    //                 console.log(data);
+    //             });
+    //         // .catch(() => showSnackbar(enqueueSnackbar, null, 'Nie udało się po', 'error'));
+    //     },
+    //     []
+    // );
+
+    // useEffect(getPiture, [getPiture]);
+
     return (
         <div style={{position: 'relative'}}>
             <RemoveIcon onClick={(e) => {
@@ -56,7 +80,8 @@ const AnimalCard = ({
                 to={`/${ROUTE.ANIMALS}/${animal.id}`}
             >
                 <figure>
-                    <img src="https://media-be.chewy.com/wp-content/uploads/2022/09/27095535/cute-dogs-pembroke-welsh-corgi.jpg" />
+                    {/* /users/{userId}/animals/{animalId}/pictures */}
+                    <img src={`${API_HOST}/users/${auth?.id}/animals/${animal.id}/pictures`} />
                 </figure>
                 <Name>{animal.name}</Name>
                 <span>{animal.age} lat</span>
