@@ -12,7 +12,7 @@ import './customstyle.css';
 import { showSnackbar } from '../../../../../components/Snackbar/Snackbar';
 import { useSnackbar } from 'notistack';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { date, object, string } from 'yup';
+import { date, mixed, object, string } from 'yup';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
 
@@ -32,6 +32,7 @@ const AnimalAdd = () => {
         county: string().required(),
         dateOfBirth: date().required(),
         description: string().required(),
+        file: mixed().required(),
         name: string().required(),
     });
     const {

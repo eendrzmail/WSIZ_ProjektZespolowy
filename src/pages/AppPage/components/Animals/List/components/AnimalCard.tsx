@@ -45,30 +45,6 @@ const AnimalCard = ({
         []
     );
 
-    // const getPiture = useCallback(
-    //     () => {
-    //         if (!auth) return;
-
-    //         fetch(`${API_HOST}/users/${auth.id}/animals/${animal.id}/pictures`, {
-    //             method: 'GET',
-    //             headers: {
-    //                 'Authorization': jwt,
-    //             },
-    //         })
-    //             .then((response) => {
-    //                 if (response.ok) return response.json();
-    //                 return Promise.reject(response);
-    //             })
-    //             .then((data) => {
-    //                 console.log(data);
-    //             });
-    //         // .catch(() => showSnackbar(enqueueSnackbar, null, 'Nie udało się po', 'error'));
-    //     },
-    //     []
-    // );
-
-    // useEffect(getPiture, [getPiture]);
-
     return (
         <div style={{position: 'relative'}}>
             <RemoveIcon onClick={(e) => {
