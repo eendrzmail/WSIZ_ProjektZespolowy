@@ -1,8 +1,10 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, TextField } from '@mui/material';
 import { useSnackbar } from 'notistack';
 import React, { useCallback, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
+import { object, string } from 'yup';
 import { useAppSelector } from '../../../../app/hooks';
 import Loader from '../../../../components/Loader';
 import { showSnackbar } from '../../../../components/Snackbar/Snackbar';
@@ -11,7 +13,21 @@ import { LoginWrapper } from '../LoginComponent/Login.styled';
 import { FormWrapper, RegisterWrapper } from './Register.styled';
 
 const RegisterComponent = () => {
-    const {register, handleSubmit} = useForm();
+    const schema = object().shape({
+        username: string().required(),
+        password: string().required(),
+        email: string().required(),
+        firstName: string().required(),
+        lastName: string().required(),
+        city: string().required(),
+        country: string().required(),
+        voivodeship: string().required(),
+    });
+
+    const {register, handleSubmit} = useForm({
+        resolver: yupResolver(schema)
+    });
+    
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
@@ -43,7 +59,7 @@ const RegisterComponent = () => {
     );
 
     return (
-        <form onSubmit={handleSubmit(handleOnSubmit)}>
+        <form onSubmit={handleSubmit(handleOnSubmit, () => showSnackbar(enqueueSnackbar, null, 'Wypełnij wszystkie pola', 'error'))}>
             {isLoading
                 ?  <Loader />
                 : (

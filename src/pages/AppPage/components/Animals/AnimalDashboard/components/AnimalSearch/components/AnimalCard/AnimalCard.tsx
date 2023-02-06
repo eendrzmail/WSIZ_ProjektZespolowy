@@ -3,6 +3,9 @@ import { IAnimal } from '../../../../../../../../../types/Animal';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CloseIcon from '@mui/icons-material/Close';
 import { ActionIcon, CardWrapper, IconContainer, Name } from './AnimalCard.styled';
+import { API_HOST } from '../../../../../../../../../shared/common/consts';
+import { useAppSelector } from '../../../../../../../../../app/hooks';
+import { getAuth } from '../../../../../../../../../shared/reducers/AuthReducer';
 
 type Props = {
     animal: IAnimal;
@@ -15,11 +18,13 @@ const AnimalCard = ({
     onDislike,
     onLike
 }: Props) => {
+    const auth = useAppSelector(getAuth);
+
     return (
         <div>
             <CardWrapper>
                 <figure>
-                    <img src="https://media-be.chewy.com/wp-content/uploads/2022/09/27095535/cute-dogs-pembroke-welsh-corgi.jpg" />
+                    <img src={`${API_HOST}/users/${auth?.id}/animals/${animal.id}/pictures`} />
                 </figure>
                 <Name>{animal.name}</Name>
                 <span>{animal.age} lat</span>

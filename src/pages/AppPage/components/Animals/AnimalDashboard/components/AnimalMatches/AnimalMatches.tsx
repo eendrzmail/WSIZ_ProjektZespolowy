@@ -24,6 +24,7 @@ const AnimalMatches = ({
                 <MatchesChatList
                     animalId={id}
                     onSelect={handleChange}
+                    chatId={chatId?.chatId || null}
                 />
 
                 <Chat

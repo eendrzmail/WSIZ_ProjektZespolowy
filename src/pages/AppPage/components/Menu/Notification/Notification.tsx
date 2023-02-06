@@ -37,7 +37,7 @@ const NotificationComponent = (props: Props) => {
                     return Promise.reject(response);
                 })
                 .then(setNotifications)
-                .catch(() => showSnackbar(enqueueSnackbar, null, 'Nie udało się pobrać zwierząt', 'error'));
+                .catch(() => showSnackbar(enqueueSnackbar, null, 'Nie udało się pobrać notyfikacji', 'error'));
         },
         []
     ); 

@@ -9,12 +9,14 @@ import { MatchesListContainer } from './MatchesChatList.styled';
 
 type Props = {
     animalId: string;
-    onSelect: (id: IMatch) => void
+    onSelect: (id: IMatch) => void;
+    chatId?: number | null;
 }
 
 const MatchesChatList = ({
     animalId,
     onSelect,
+    chatId: selectedChatId
 }:Props) => {
     const [matches, setMatches] = useState<IMatch[]>([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -54,6 +56,9 @@ const MatchesChatList = ({
                     <ChatItem 
                         key={x.id}
                         onClick={() => onSelect(x)}
+                        className={
+                            x.chatId == selectedChatId ? 'active' : ''
+                        }
                     >
                         {x.name}
                     </ChatItem>

@@ -1,4 +1,4 @@
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Button, FormControl, IconButton, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import React, { useCallback, useState } from 'react';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
@@ -11,6 +11,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './customstyle.css';
 import { showSnackbar } from '../../../../../components/Snackbar/Snackbar';
 import { useSnackbar } from 'notistack';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { date, mixed, object, string } from 'yup';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+
 
 function zfill(num: number, len: number) {return (Array(len).join('0') + num).slice(-len);}
 
@@ -21,15 +25,57 @@ const AnimalAdd = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+
+    const schema = object().shape({
+        category: string().required(),
+        city: string().required(),
+        county: string().required(),
+        dateOfBirth: date().required(),
+        description: string().required(),
+        file: mixed().required(),
+        name: string().required(),
+    });
     const {
         register, 
         handleSubmit,
         control,
-    } = useForm();
+        getValues
+    } = useForm({
+        resolver: yupResolver(schema)
+    });
+
+    const addPhoto = useCallback(
+        (files: FileList, data: any) => {
+            if (!auth) return;
+
+            const formData = new FormData();
+            formData.append('file', files[0]);
+
+            fetch(`${API_HOST}/users/${auth.id}/animals/${data.id}/pictures`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': jwt,
+                },
+                body: formData
+            })
+                .then((response) => {
+                    if (response.ok) return response.json();
+                    return Promise.reject(response);
+                })
+                .then(() => {
+                    navigate('/');
+                })
+                .catch(() => showSnackbar(enqueueSnackbar, null, 'Nie udało się dodać', 'error'))
+                .finally(() => setIsLoading(false));
+
+        },
+        []
+    );
 
     const handleOnSubmit = useCallback(
         (data: FieldValues) => {
             if (!auth) return;
+            console.log(data);
 
             const dateOfBirth = data.dateOfBirth as Date;
 
@@ -53,7 +99,10 @@ const AnimalAdd = () => {
                     if (response.ok) return response.json();
                     return Promise.reject(response);
                 })
-                .then(() => navigate('/'))
+                .then((response) => {
+                    addPhoto(data.file, response);
+                    // navigate('/');
+                })
                 .catch(() => showSnackbar(enqueueSnackbar, null, 'Nie udało się dodać', 'error'))
                 .finally(() => setIsLoading(false));
         },
@@ -62,7 +111,7 @@ const AnimalAdd = () => {
 
     return (
         <AddAnimalWrapper>
-            <AnimalForm onSubmit={handleSubmit(handleOnSubmit)}>
+            <AnimalForm onSubmit={handleSubmit(handleOnSubmit, () => showSnackbar(enqueueSnackbar, null, 'Uzupełnij wszystkie pola', 'error'))}>
                 <TextField id="name" label="Imie" variant="outlined" type="text" {...register('name')}/>
 
                 <TextField 
@@ -75,6 +124,16 @@ const AnimalAdd = () => {
                     type="text" 
                     {...register('description')}
                 />
+
+                <div>
+                    <IconButton color="primary" aria-label="upload picture" component="label">
+                        <input hidden accept="image/*" type="file" {...register('file')}/>
+                        <PhotoCamera />
+                    </IconButton>
+                    {getValues()['file'] && getValues()['file'][0] && (
+                        getValues()['file'][0].name
+                    )}
+                </div>
                 
                 <TextField id="city" label="Miasto" variant="outlined" type="text" {...register('city')}/>
                 
